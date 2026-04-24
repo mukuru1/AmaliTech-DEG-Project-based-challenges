@@ -34,3 +34,26 @@ export default function Connections({ nodes, connections, connectingFrom, mouseP
           />
         </marker>
       </defs>
+
+      {connections.map((conn) => {
+        const sourceNode = nodes.find((n) => n.id === conn.sourceId);
+        const targetNode = nodes.find((n) => n.id === conn.targetId);
+        if (!sourceNode || !targetNode) return null;
+
+        const from =
+          conn.sourcePort !== null && conn.sourcePort !== undefined
+            ? getOptionPortPosition(
+                sourceNode,
+                conn.sourcePort,
+                sourceNode.data.options?.length || 1
+              )
+            : getOutputPortPosition(sourceNode);
+
+        const to = getInputPortPosition(targetNode);
+
+        return (
+          <g key={conn.id}>
+            <ConnectionPath from={from} to={to} />
+          </g>
+        );
+      })}

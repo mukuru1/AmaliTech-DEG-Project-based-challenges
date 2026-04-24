@@ -104,4 +104,23 @@ function flowReducer(state, action) {
       return { ...state, editingNodeId: action.payload, selectedNodeId: action.payload };
     }
 
+    case 'ADD_CONNECTION': {
+      const exists = state.connections.some(
+        (c) =>
+          c.sourceId === action.payload.sourceId &&
+          c.sourcePort === action.payload.sourcePort &&
+          c.targetId === action.payload.targetId
+      );
+      if (exists) return state;
+      if (action.payload.sourceId === action.payload.targetId) return state;
+      return {
+        ...state,
+        connections: [
+          ...state.connections,
+          { id: nanoid(8), ...action.payload },
+        ],
+      };
+    }
+
+
 }

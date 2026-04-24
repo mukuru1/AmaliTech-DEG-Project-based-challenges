@@ -141,4 +141,26 @@ function flowReducer(state, action) {
   }
 }
 
+function getDefaultData(type) {
+  switch (type) {
+    case 'start':
+      return { label: 'Start', text: '', options: [] };
+    case 'message':
+      return { label: 'Message', text: '', options: [] };
+    case 'question':
+      return {
+        label: 'Question',
+        text: '',
+        options: [
+          { id: nanoid(6), label: 'Option 1', nextId: null },
+          { id: nanoid(6), label: 'Option 2', nextId: null },
+        ],
+      };
+    case 'end':
+      return { label: 'End', text: '', options: [] };
+    default:
+      return { label: 'Node', text: '', options: [] };
+  }
+}
+
 }

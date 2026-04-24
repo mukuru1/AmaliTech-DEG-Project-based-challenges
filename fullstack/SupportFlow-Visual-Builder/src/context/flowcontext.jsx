@@ -162,5 +162,78 @@ function getDefaultData(type) {
       return { label: 'Node', text: '', options: [] };
   }
 }
+export function FlowProvider({ children }) {
+  const [state, dispatch] = useReducer(flowReducer, initialState);
+
+  const addNode = useCallback(
+    (type, position) => dispatch({ type: 'ADD_NODE', payload: { type, position } }),
+    []
+  );
+
+  const updateNode = useCallback(
+    (id, data) => dispatch({ type: 'UPDATE_NODE', payload: { id, data } }),
+    []
+  );
+
+  const moveNode = useCallback(
+    (id, position) => dispatch({ type: 'MOVE_NODE', payload: { id, position } }),
+    []
+  );
+
+  const deleteNode = useCallback(
+    (id) => dispatch({ type: 'DELETE_NODE', payload: id }),
+    []
+  );
+
+  const selectNode = useCallback(
+    (id) => dispatch({ type: 'SELECT_NODE', payload: id }),
+    []
+  );
+
+  const editNode = useCallback(
+    (id) => dispatch({ type: 'EDIT_NODE', payload: id }),
+    []
+  );
+
+  const addConnection = useCallback(
+    (sourceId, targetId, sourcePort) =>
+      dispatch({
+        type: 'ADD_CONNECTION',
+        payload: { sourceId, targetId, sourcePort },
+      }),
+    []
+  );
+
+  const deleteConnection = useCallback(
+    (id) => dispatch({ type: 'DELETE_CONNECTION', payload: id }),
+    []
+  );
+
+  const setPreview = useCallback(
+    (previewState) => dispatch({ type: 'SET_PREVIEW', payload: previewState }),
+    []
+  );
+
+  const loadFlow = useCallback(
+    (data) => dispatch({ type: 'LOAD_FLOW', payload: data }),
+    []
+  );
+
+  const value = {
+    ...state,
+    addNode,
+    updateNode,
+    moveNode,
+    deleteNode,
+    selectNode,
+    editNode,
+    addConnection,
+    deleteConnection,
+    setPreview,
+    loadFlow,
+  };
+
+  return <FlowContext.Provider value={value}>{children}</FlowContext.Provider>;
+}
 
 }

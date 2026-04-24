@@ -23,3 +23,27 @@ export function getParents(nodes, connections, nodeId) {
 export function getStartNode(nodes) {
   return nodes.find((n) => n.type === 'start');
 }
+
+export function traverseFromStart(nodes, connections) {
+  const start = getStartNode(nodes);
+  if (!start) return [];
+
+  const visited = new Set();
+  const order = [];
+
+  function visit(nodeId) {
+    if (visited.has(nodeId)) return;
+    visited.add(nodeId);
+    const node = nodes.find((n) => n.id === nodeId);
+    if (!node) return;
+    order.push(node);
+
+    const children = getChildren(nodes, connections, nodeId);
+    for (const child of children) {
+      visit(child.id);
+    }
+  }
+
+  visit(start.id);
+  return order;
+}

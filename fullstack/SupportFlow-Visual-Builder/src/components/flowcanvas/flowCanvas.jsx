@@ -100,3 +100,61 @@ export default function FlowCanvas() {
     },
     [nodes, pan, handleSelect]
   );
+
+  const handlePortPointerDown = useCallback(
+    (nodeId, port) => {
+      startConnecting(nodeId, port);
+    },
+    [startConnecting]
+  );
+
+  const handlePortPointerUp = useCallback(
+    (targetId) => {
+      finishConnecting(targetId);
+    },
+    [finishConnecting]
+  );
+
+  const handleDrop = useCallback(
+    (e) => {
+      e.preventDefault();
+      const type = e.dataTransfer.getData('nodeType');
+      if (!type) return;
+
+      const rect = canvasRef.current.getBoundingClientRect();
+      const x = snapToGrid(e.clientX - rect.left - pan.x - 110);
+      const y = snapToGrid(e.clientY - rect.top - pan.y - 20);
+
+      addNode(type, { x: Math.max(0, x), y: Math.max(0, y) });
+    },
+    [addNode, pan]
+  );
+
+  const handlePortPointerDown = useCallback(
+    (nodeId, port) => {
+      startConnecting(nodeId, port);
+    },
+    [startConnecting]
+  );
+
+  const handlePortPointerUp = useCallback(
+    (targetId) => {
+      finishConnecting(targetId);
+    },
+    [finishConnecting]
+  );
+
+  const handleDrop = useCallback(
+    (e) => {
+      e.preventDefault();
+      const type = e.dataTransfer.getData('nodeType');
+      if (!type) return;
+
+      const rect = canvasRef.current.getBoundingClientRect();
+      const x = snapToGrid(e.clientX - rect.left - pan.x - 110);
+      const y = snapToGrid(e.clientY - rect.top - pan.y - 20);
+
+      addNode(type, { x: Math.max(0, x), y: Math.max(0, y) });
+    },
+    [addNode, pan]
+  );

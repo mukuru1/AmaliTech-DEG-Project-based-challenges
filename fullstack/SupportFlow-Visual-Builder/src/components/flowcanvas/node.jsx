@@ -131,3 +131,28 @@ return (
           }}
         />
       )}
+
+      {(node.type === 'question' || (node.type === 'start' && node.data.options?.length > 0)) &&
+        node.data.options?.map((opt, i) => {
+          const total = node.data.options.length;
+          const spacing = NODE_WIDTH / (total + 1);
+          return (
+            <div
+              key={opt.id}
+              className={clsx(
+                'node-port absolute -bottom-1.5',
+                connectingFrom?.nodeId === node.id &&
+                  connectingFrom?.port === i &&
+                  'active'
+              )}
+              style={{ left: spacing * (i + 1) - 6 }}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                onPortPointerDown?.(node.id, i);
+              }}
+            />
+          );
+        })}
+    </div>
+  );
+}

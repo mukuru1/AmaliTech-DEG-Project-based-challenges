@@ -71,4 +71,15 @@ function flowReducer(state, action) {
       };
     }
 
+     case 'MOVE_NODE': {
+      return {
+        ...state,
+        nodes: state.nodes.map((n) =>
+          n.id === action.payload.id
+            ? { ...n, position: action.payload.position }
+            : n
+        ),
+      };
+    }
+
 }

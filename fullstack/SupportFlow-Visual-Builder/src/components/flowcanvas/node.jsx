@@ -108,3 +108,13 @@ return (
           </>
         )}
       </div>
+
+      {node.type !== 'start' && (
+        <div
+          className="node-port absolute -top-1.5 left-1/2 -translate-x-1/2"
+          onPointerUp={(e) => {
+            e.stopPropagation();
+            onPortPointerUp?.(node.id);
+          }}
+        />
+      )}

@@ -96,4 +96,8 @@ function flowReducer(state, action) {
       };
     }
 
+    case 'SELECT_NODE': {
+      return { ...state, selectedNodeId: action.payload };
+    }
+
 }

@@ -31,3 +31,31 @@ export function getOptionPortPosition(node, optionIndex, totalOptions) {
     y: node.position.y + getNodeHeight(node),
   };
 }
+
+export function getNodeHeight(node) {
+  const hasOptions = node.data.options?.length > 0;
+  if ((node.type === 'question' || node.type === 'start') && hasOptions) {
+    const textHeight = node.data.text ? 24 : 0;
+    return NODE_HEADER_HEIGHT + textHeight + node.data.options.length * 32 + 16;
+  }
+  if (node.type === 'end' && node.data.text) {
+    return NODE_HEADER_HEIGHT + 48;
+  }
+  return NODE_HEADER_HEIGHT + 48;
+}
+
+export function getCanvasPoint(e, canvasRef, pan) {
+  const rect = canvasRef.current.getBoundingClientRect();
+  return {
+    x: e.clientX - rect.left - pan.x,
+    y: e.clientY - rect.top - pan.y,
+  };
+}
+
+export function distance(a, b) {
+  return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+}
+
+export function snapToGrid(value, gridSize = 24) {
+  return Math.round(value / gridSize) * gridSize;
+}

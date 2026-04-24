@@ -122,5 +122,11 @@ function flowReducer(state, action) {
       };
     }
 
+    case 'DELETE_CONNECTION': {
+      return {
+        ...state,
+        connections: state.connections.filter((c) => c.id !== action.payload),
+      };
+    }
 
 }

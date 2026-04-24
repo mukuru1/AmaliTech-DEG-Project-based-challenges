@@ -158,3 +158,19 @@ export default function FlowCanvas() {
     },
     [addNode, pan]
   );
+
+   const handleDragOver = useCallback((e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+  }, []);
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        cancelConnecting();
+        clearSelection();
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [cancelConnecting, clearSelection]);

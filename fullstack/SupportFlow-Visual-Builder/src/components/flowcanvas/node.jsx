@@ -49,3 +49,62 @@ return (
           {node.data.label || config.label}
         </span>
       </div>
+
+      <div className="px-3 py-2">
+        {node.type === 'message' && (
+          <p className="text-xs text-neutral-500 line-clamp-2">
+            {node.data.text || 'No message text'}
+          </p>
+        )}
+        {node.type === 'question' && (
+          <>
+            <p className="text-xs text-neutral-500 line-clamp-1 mb-1.5">
+              {node.data.text || 'No question text'}
+            </p>
+            <div className="flex flex-col gap-1">
+              {node.data.options?.map((opt, i) => (
+                <div
+                  key={opt.id}
+                  className="text-xs px-2 py-1 rounded-md bg-white border border-neutral-200 text-neutral-600 truncate"
+                >
+                  {opt.label}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+        {node.type === 'start' && (
+          <>
+            {node.data.text && (
+              <p className="text-xs text-neutral-500 line-clamp-1 mb-1.5">
+                {node.data.text}
+              </p>
+            )}
+            {node.data.options?.length > 0 ? (
+              <div className="flex flex-col gap-1">
+                {node.data.options.map((opt, i) => (
+                  <div
+                    key={opt.id}
+                    className="text-xs px-2 py-1 rounded-md bg-white border border-primary-200 text-primary-600 truncate"
+                  >
+                    {opt.label}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-xs text-neutral-400 italic">Flow entry point</p>
+            )}
+          </>
+        )}
+        {node.type === 'end' && (
+          <>
+            {node.data.text ? (
+              <p className="text-xs text-neutral-500 line-clamp-2">
+                {node.data.text}
+              </p>
+            ) : (
+              <p className="text-xs text-neutral-400 italic">Flow ends here</p>
+            )}
+          </>
+        )}
+      </div>

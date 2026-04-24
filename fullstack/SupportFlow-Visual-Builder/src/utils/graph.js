@@ -94,3 +94,11 @@ export function detectCycle(nodes, connections) {
 
   return false;
 }
+
+export function getOrphanNodes(nodes, connections) {
+  const start = getStartNode(nodes);
+  if (!start) return nodes;
+
+  const reachable = new Set(traverseFromStart(nodes, connections).map((n) => n.id));
+  return nodes.filter((n) => !reachable.has(n.id));
+}

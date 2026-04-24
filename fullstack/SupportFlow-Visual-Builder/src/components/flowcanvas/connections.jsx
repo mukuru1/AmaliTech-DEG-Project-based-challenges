@@ -57,3 +57,35 @@ export default function Connections({ nodes, connections, connectingFrom, mouseP
           </g>
         );
       })}
+
+       {connectingFrom && mousePos && (() => {
+        const sourceNode = nodes.find((n) => n.id === connectingFrom.nodeId);
+        if (!sourceNode) return null;
+
+        const from =
+          connectingFrom.port !== null && connectingFrom.port !== undefined
+            ? getOptionPortPosition(
+                sourceNode,
+                connectingFrom.port,
+                sourceNode.data.options?.length || 1
+              )
+            : getOutputPortPosition(sourceNode);
+
+        return (
+          <ConnectionPath
+            from={from}
+            to={mousePos}
+            active
+          />
+        );
+      })()}
+    </svg>
+  );
+}
+
+function ConnectionPath({ from, to, active = false }) {
+  const dx = Math.abs(to.x - from.x);
+  const dy = to.y - from.y;
+  const curvature = Math.max(50, Math.min(150, dy * 0.5, dx * 0.3));
+
+  const path = `M ${from.x} ${from.y} C ${from.x} ${from.y + curvature}, ${to.x} ${to.y - curvature}, ${to.x} ${to.y}`;

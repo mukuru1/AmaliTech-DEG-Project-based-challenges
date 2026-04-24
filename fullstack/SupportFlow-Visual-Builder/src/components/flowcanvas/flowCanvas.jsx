@@ -66,3 +66,37 @@ export default function FlowCanvas() {
     },
     [isPanning, panStart, dragState, connectingFrom, pan, moveNode]
   );
+
+  const handleCanvasPointerUp = useCallback(
+    (e) => {
+      if (isPanning) {
+        setIsPanning(false);
+        return;
+      }
+      if (dragState) {
+        setDragState(null);
+        return;
+      }
+    },
+    [isPanning, dragState]
+  );
+
+   const handleNodePointerDown = useCallback(
+    (nodeId, e) => {
+      e.stopPropagation();
+      handleSelect(nodeId);
+
+      const rect = canvasRef.current.getBoundingClientRect();
+      const node = nodes.find((n) => n.id === nodeId);
+      if (!node) return;
+
+      setDragState({
+        nodeId,
+        offsetX: e.clientX - rect.left - pan.x - node.position.x,
+        offsetY: e.clientY - rect.top - pan.y - node.position.y,
+      });
+
+      e.currentTarget.setPointerCapture(e.pointerId);
+    },
+    [nodes, pan, handleSelect]
+  );

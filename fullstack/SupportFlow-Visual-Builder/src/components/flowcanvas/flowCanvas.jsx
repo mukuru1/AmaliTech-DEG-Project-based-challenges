@@ -37,3 +37,13 @@ export default function FlowCanvas() {
     },
     [pan, clearSelection, cancelConnecting]
   );
+
+   const handleCanvasPointerMove = useCallback(
+    (e) => {
+      if (isPanning) {
+        setPan({
+          x: e.clientX - panStart.x,
+          y: e.clientY - panStart.y,
+        });
+        return;
+      }

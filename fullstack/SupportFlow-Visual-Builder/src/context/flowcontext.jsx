@@ -100,4 +100,8 @@ function flowReducer(state, action) {
       return { ...state, selectedNodeId: action.payload };
     }
 
+     case 'EDIT_NODE': {
+      return { ...state, editingNodeId: action.payload, selectedNodeId: action.payload };
+    }
+
 }

@@ -1,5 +1,6 @@
 import { useFlowContext } from '../../context/flowcontext';
-
+import { NODE_TYPES } from './nodeTypes';
+import FlowCanvas from './flowCanvas';
 
 
 export default function CanvasWrapper() {

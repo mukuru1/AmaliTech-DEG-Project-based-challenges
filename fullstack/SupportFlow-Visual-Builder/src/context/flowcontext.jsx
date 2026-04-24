@@ -48,4 +48,16 @@ const initialState = {
   previewState: null,
 };
 
+function flowReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_NODE': {
+      const newNode = {
+        id: nanoid(8),
+        type: action.payload.type,
+        position: action.payload.position || { x: 300, y: 200 },
+        data: action.payload.data || getDefaultData(action.payload.type),
+      };
+      return { ...state, nodes: [...state.nodes, newNode] };
+    }
+
 }

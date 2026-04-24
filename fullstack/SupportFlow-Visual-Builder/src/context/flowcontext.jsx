@@ -82,4 +82,18 @@ function flowReducer(state, action) {
       };
     }
 
+    case 'DELETE_NODE': {
+      return {
+        ...state,
+        nodes: state.nodes.filter((n) => n.id !== action.payload),
+        connections: state.connections.filter(
+          (c) => c.sourceId !== action.payload && c.targetId !== action.payload
+        ),
+        selectedNodeId:
+          state.selectedNodeId === action.payload ? null : state.selectedNodeId,
+        editingNodeId:
+          state.editingNodeId === action.payload ? null : state.editingNodeId,
+      };
+    }
+
 }

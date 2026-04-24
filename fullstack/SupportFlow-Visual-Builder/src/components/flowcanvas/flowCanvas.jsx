@@ -47,3 +47,22 @@ export default function FlowCanvas() {
         });
         return;
       }
+
+      if (dragState) {
+        const rect = canvasRef.current.getBoundingClientRect();
+        const x = snapToGrid(e.clientX - rect.left - pan.x - dragState.offsetX);
+        const y = snapToGrid(e.clientY - rect.top - pan.y - dragState.offsetY);
+        moveNode(dragState.nodeId, { x: Math.max(0, x), y: Math.max(0, y) });
+        return;
+      }
+
+      if (connectingFrom) {
+        const rect = canvasRef.current.getBoundingClientRect();
+        setMousePos({
+          x: e.clientX - rect.left - pan.x,
+          y: e.clientY - rect.top - pan.y,
+        });
+      }
+    },
+    [isPanning, panStart, dragState, connectingFrom, pan, moveNode]
+  );

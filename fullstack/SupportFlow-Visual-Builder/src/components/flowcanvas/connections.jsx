@@ -89,3 +89,27 @@ function ConnectionPath({ from, to, active = false }) {
   const curvature = Math.max(50, Math.min(150, dy * 0.5, dx * 0.3));
 
   const path = `M ${from.x} ${from.y} C ${from.x} ${from.y + curvature}, ${to.x} ${to.y - curvature}, ${to.x} ${to.y}`;
+
+   return (
+    <>
+      {/* Invisible wider path for easier clicking */}
+      <path
+        d={path}
+        fill="none"
+        stroke="transparent"
+        strokeWidth={16}
+        style={{ pointerEvents: 'stroke', cursor: 'pointer' }}
+      />
+      {/* Visible path */}
+      <path
+        d={path}
+        fill="none"
+        stroke={active ? 'var(--color-connection-highlight)' : 'var(--color-connection)'}
+        strokeWidth={2}
+        strokeDasharray={active ? '6 4' : 'none'}
+        markerEnd={active ? 'url(#arrowhead-active)' : 'url(#arrowhead)'}
+        className={active ? 'connection-line-animated' : ''}
+      />
+    </>
+  );
+}

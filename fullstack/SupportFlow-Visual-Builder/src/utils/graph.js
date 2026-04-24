@@ -68,3 +68,29 @@ export function findPath(nodes, connections, fromId, toId) {
 
   return null;
 }
+
+export function detectCycle(nodes, connections) {
+  const visited = new Set();
+  const stack = new Set();
+
+  function dfs(nodeId) {
+    if (stack.has(nodeId)) return true;
+    if (visited.has(nodeId)) return false;
+
+    visited.add(nodeId);
+    stack.add(nodeId);
+
+    const children = getChildren(nodes, connections, nodeId);
+    for (const child of children) {
+      if (dfs(child.id)) return true;
+    }
+
+    stack.delete(nodeId);
+    return false;
+  }
+  for (const node of nodes) {
+    if (dfs(node.id)) return true;
+  }
+
+  return false;
+}

@@ -174,3 +174,45 @@ export default function FlowCanvas() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [cancelConnecting, clearSelection]);
+
+   return (
+    <div
+      ref={canvasRef}
+      className="flex-1 relative overflow-hidden canvas-grid cursor-default"
+      onPointerDown={handleCanvasPointerDown}
+      onPointerMove={handleCanvasPointerMove}
+      onPointerUp={handleCanvasPointerUp}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+    >
+      <div
+        className="absolute"
+        style={{
+          transform: `translate(${pan.x}px, ${pan.y}px)`,
+          width: 1,
+          height: 1,
+        }}
+      >
+        <Connections
+          nodes={nodes}
+          connections={connections}
+          connectingFrom={connectingFrom}
+          mousePos={mousePos}
+        />
+
+        {nodes.map((node) => (
+          <FlowNode
+            key={node.id}
+            node={node}
+            selected={selectedNodeId === node.id}
+            onPointerDown={(e) => handleNodePointerDown(node.id, e)}
+            onDoubleClick={() => editNode(node.id)}
+            onPortPointerDown={handlePortPointerDown}
+            onPortPointerUp={handlePortPointerUp}
+            connectingFrom={connectingFrom}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}

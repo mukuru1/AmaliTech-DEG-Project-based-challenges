@@ -128,5 +128,17 @@ function flowReducer(state, action) {
         connections: state.connections.filter((c) => c.id !== action.payload),
       };
     }
+     case 'SET_PREVIEW': {
+      return { ...state, previewState: action.payload };
+    }
+
+    case 'LOAD_FLOW': {
+      return { ...state, ...action.payload };
+    }
+
+    default:
+      return state;
+  }
+}
 
 }

@@ -60,4 +60,15 @@ function flowReducer(state, action) {
       return { ...state, nodes: [...state.nodes, newNode] };
     }
 
+    case 'UPDATE_NODE': {
+      return {
+        ...state,
+        nodes: state.nodes.map((n) =>
+          n.id === action.payload.id
+            ? { ...n, data: { ...n.data, ...action.payload.data } }
+            : n
+        ),
+      };
+    }
+
 }

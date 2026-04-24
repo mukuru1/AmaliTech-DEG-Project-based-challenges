@@ -20,4 +20,32 @@ function convertFlowData(raw) {
     },
   }));
 
+   const connections = [];
+  raw.nodes.forEach((n) => {
+    if (n.options) {
+      n.options.forEach((opt, i) => {
+        if (opt.nextId) {
+          connections.push({
+            id: nanoid(8),
+            sourceId: n.id,
+            targetId: opt.nextId,
+            sourcePort: i,
+          });
+        }
+      });
+    }
+  });
+
+  return { nodes, connections };
+}
+const convertedData = convertFlowData(flowData);
+
+const initialState = {
+  nodes: convertedData.nodes,
+  connections: convertedData.connections,
+  selectedNodeId: null,
+  editingNodeId: null,
+  previewState: null,
+};
+
 }

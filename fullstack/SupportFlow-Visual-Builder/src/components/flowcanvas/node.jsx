@@ -35,3 +35,17 @@ return (
       onPointerDown={onPointerDown}
       onDoubleClick={onDoubleClick}
     >
+
+        <div
+        className="flex items-center gap-2 px-3 rounded-t-xl"
+        style={{
+          height: 36,
+          color: config.color,
+          borderBottom: `1px solid ${config.borderColor}`,
+        }}
+      >
+        <span className="flex-shrink-0">{config.icon}</span>
+        <span className="text-xs font-semibold truncate">
+          {node.data.label || config.label}
+        </span>
+      </div>

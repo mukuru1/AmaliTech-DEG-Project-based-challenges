@@ -118,3 +118,16 @@ return (
           }}
         />
       )}
+ 
+ {node.type !== 'end' && (
+        <div
+          className={clsx(
+            'node-port absolute -bottom-1.5 left-1/2 -translate-x-1/2',
+            connectingFrom?.nodeId === node.id && 'active'
+          )}
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            onPortPointerDown?.(node.id, null);
+          }}
+        />
+      )}

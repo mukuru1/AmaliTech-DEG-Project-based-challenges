@@ -235,5 +235,9 @@ export function FlowProvider({ children }) {
 
   return <FlowContext.Provider value={value}>{children}</FlowContext.Provider>;
 }
-
+export function useFlowContext() {
+  const ctx = useContext(FlowContext);
+  if (!ctx) throw new Error('useFlowContext must be used within FlowProvider');
+  return ctx;
 }
+

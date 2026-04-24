@@ -47,3 +47,24 @@ export function traverseFromStart(nodes, connections) {
   visit(start.id);
   return order;
 }
+
+export function findPath(nodes, connections, fromId, toId) {
+  const queue = [[fromId]];
+  const visited = new Set();
+
+  while (queue.length > 0) {
+    const path = queue.shift();
+    const current = path[path.length - 1];
+
+    if (current === toId) return path;
+    if (visited.has(current)) continue;
+    visited.add(current);
+
+    const children = getChildren(nodes, connections, current);
+    for (const child of children) {
+      queue.push([...path, child.id]);
+    }
+  }
+
+  return null;
+}

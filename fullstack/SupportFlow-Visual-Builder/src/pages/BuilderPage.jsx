@@ -4,7 +4,7 @@ import CanvasWrapper from '../components/flowcanvas/canvasWrapper';
 import EditPanel from '../components/Editor/editPanel';
 import ChatWindow from '../components/Preview/chatWindow';
 import PreviewControls from '../components/Preview/previewControls';
-import Button from '../components/UI/button';
+import Button from '../components/UI/buttons';
 import { autoLayout } from '../utils/layout';
 
 

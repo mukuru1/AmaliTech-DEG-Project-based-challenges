@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import Button from '../UI/button';
+import Button from '../UI/buttons';
 import Input from '../UI/input';
 
 export default function OptionEditor({ options, onChange }) {

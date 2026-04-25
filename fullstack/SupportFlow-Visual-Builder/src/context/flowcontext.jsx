@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, useCallback } from 'react';
 import { nanoid } from 'nanoid';
-import flowData from '../flow_data.json';
+import flowData from '../../flow_data.json';
 
 const FlowContext = createContext(null);
 

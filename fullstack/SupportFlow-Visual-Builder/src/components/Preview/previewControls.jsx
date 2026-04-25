@@ -1,4 +1,4 @@
-import Button from '../UI/button';
+import Button from '../UI/buttons';
 
 export default function PreviewControls({ onRestart, onClose }) {
   return (

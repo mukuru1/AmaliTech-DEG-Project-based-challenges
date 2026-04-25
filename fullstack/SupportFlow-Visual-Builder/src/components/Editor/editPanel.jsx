@@ -32,3 +32,24 @@ export default function EditPanel() {
       <div className="flex-1 overflow-y-auto">
         <NodeEditor />
       </div>
+
+      {errors.length > 0 && (
+        <div className="border-t border-neutral-200 p-3 bg-warning-50">
+          <p className="text-xs font-medium text-warning-700 mb-1.5">Issues</p>
+          <ul className="space-y-1">
+            {errors.map((err, i) => (
+              <li key={i} className="text-xs text-warning-600 flex items-start gap-1.5">
+                <span className="mt-0.5 flex-shrink-0">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L1 21h22L12 2zm0 4l8 14H4L12 6zm-1 4v5h2v-5h-2zm0 7v2h2v-2h-2z" />
+                  </svg>
+                </span>
+                {err}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}

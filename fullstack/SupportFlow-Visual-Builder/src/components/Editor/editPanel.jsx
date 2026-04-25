@@ -28,3 +28,7 @@ export default function EditPanel() {
           </button>
         )}
       </div>
+
+      <div className="flex-1 overflow-y-auto">
+        <NodeEditor />
+      </div>

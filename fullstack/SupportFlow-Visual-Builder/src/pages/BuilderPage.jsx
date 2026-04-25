@@ -3,8 +3,9 @@ import { useFlowContext } from '../context/flowcontext';
 import CanvasWrapper from '../components/flowcanvas/canvasWrapper';
 import EditPanel from '../components/Editor/editPanel';
 import ChatWindow from '../components/Preview/chatWindow';
-
-
+import PreviewControls from '../components/Preview/previewControls';
+import Button from '../components/UI/button';
+import { autoLayout } from '../utils/layout';
 
 
 export default function BuilderPage() {

@@ -1,8 +1,10 @@
 import { useFlowContext } from '../../context/flowcontext';
 import useNodeSelection from '../../hooks/useNodeSelection';
+import Input from '../UI/input';
+import TextArea from '../UI/textArea';
+import Button from '../UI/button';
+import OptionEditor from './optionEditor';
 import { getNodeConfig } from '../flowcanvas/nodeTypes';
-
-
 
 
 export default function NodeEditor() {

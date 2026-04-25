@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import { getNodeConfig } from './nodeTypes';
+import { NODE_WIDTH, getNodeHeight } from '../../utils/coordinates';
 
 
 

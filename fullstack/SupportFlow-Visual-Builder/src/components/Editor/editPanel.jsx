@@ -1,7 +1,7 @@
 import { useFlowContext } from '../../context/flowcontext';
 import useNodeSelection from '../../hooks/useNodeSelection';
 import NodeEditor from './nodeEditor';
-
+import { validateFlow } from '../../utils/validation';
 
 
 export default function EditPanel() {

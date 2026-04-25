@@ -1,9 +1,8 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useFlowContext } from '../../context/flowcontext';
 import useTraversal from '../../hooks/useTraversal';
-
-
-
+import ChatMessage from './chatMessage';
+import OptionButtons from './optionButtons';
 
 
 export default function ChatWindow() {

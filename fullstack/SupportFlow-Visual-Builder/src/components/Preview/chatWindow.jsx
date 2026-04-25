@@ -121,3 +121,48 @@ export default function ChatWindow() {
   useEffect(() => {
     startChat();
   }, []);
+
+   return (
+    <div className="flex flex-col h-full bg-neutral-50">
+      {/* Chat header */}
+      <div className="px-4 py-3 bg-white border-b border-neutral-200 flex items-center gap-2.5">
+        <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-600)" strokeWidth="2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+          </svg>
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-neutral-800">Support Bot</p>
+          <p className="text-xs text-secondary-500">Online</p>
+        </div>
+      </div>
+
+      {/* Messages */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
+        {messages.map((msg, i) => (
+          <ChatMessage key={i} message={msg.text} isBot={msg.type === 'bot'} />
+        ))}
+
+        {waitingForInput && currentNode?.data.options && (
+          <OptionButtons
+            options={currentNode.data.options}
+            onSelect={handleOptionSelect}
+            disabled={false}
+          />
+        )}
+
+        {ended && (
+          <div className="text-center py-4">
+            <p className="text-xs text-neutral-400 mb-3">Chat ended</p>
+            <button
+              onClick={startChat}
+              className="px-4 py-2 text-xs font-medium rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors"
+            >
+              Restart
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
